@@ -1,8 +1,11 @@
 <script setup>
+import { ref } from 'vue'
 
+const currentView = ref('home')
 </script>
 
 <template>
+  <p>Gjeldene view: {{ currentView }}</p>
   <header class="app-header">
     <!-- Logo + Title -->
     <div class="header-left">
@@ -15,17 +18,17 @@
 
     <!-- Navigation -->
     <nav class="nav-tabs">
-      <button class="nav-btn">Hjem</button>
-      <button class="nav-btn">Logg</button>
-      <button class="nav-btn">Analyse</button>
-      <button class="nav-btn">Innstillinger</button>
+      <button @click="currentView = 'home'" class="nav-btn">Hjem</button>
+      <button @click="currentView = 'log'"class="nav-btn">Logg</button>
+      <button @click="currentView = 'analyze'"class="nav-btn">Analyse</button>
+      <button @click="currentView = 'settings'"class="nav-btn">Innstillinger</button>
     </nav>
   </header>
   <main class="main-content">
-    <div>Hjem view går her</div>
-    <div>Logg view går her</div>
-    <div>Analyse view går her</div>
-    <div>Innstillinger view går her</div>
+    <div v-if="currentView == 'home'">Hjem view går her</div>
+    <div v-else-if="currentView == 'log'">Logg view går her</div>
+    <div v-else-if="currentView == 'analyze'">Analyse view går her</div>
+    <div v-else>Innstillinger view går her</div>
   </main>
 </template>
 
