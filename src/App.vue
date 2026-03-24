@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { TEST_TYPES, ZONES } from './constants';
+import { entries, settings } from './state';
 import ZoneBadge from './components/ZoneBadge.vue';
 import Chip from './components/Chip.vue'
 
@@ -10,6 +11,8 @@ const filterType =ref('all')
 
 <template>
   <p>Gjeldene view: {{ currentView }}</p>
+  <p>{{ entries.length }} tester logget</p>
+  <p>Brukernavn: {{ settings.userName }}</p>
   <header class="app-header">
     <!-- Logo + Title -->
     <div class="header-left">
