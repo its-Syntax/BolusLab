@@ -4,6 +4,7 @@ import { TEST_TYPES, ZONES } from './constants';
 import { entries, settings } from './state';
 import ZoneBadge from './components/ZoneBadge.vue';
 import Chip from './components/Chip.vue'
+import LogView from './views/LogView.vue';
 
 const currentView = ref('home')
 const filterType =ref('all')
@@ -33,7 +34,7 @@ const filterType =ref('all')
   </header>
   <main class="main-content">
     <div v-if="currentView == 'home'">Hjem view går her</div>
-    <div v-else-if="currentView == 'log'">Logg view går her</div>
+    <div v-else-if="currentView == 'log'"><LogView v-if="currentView === 'log'" /></div>
     <div v-else-if="currentView == 'analyze'">Analyse view går her</div>
     <div v-else>Innstillinger view går her</div>
   </main>

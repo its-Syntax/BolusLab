@@ -1,0 +1,133 @@
+<script setup>
+import { reactive } from 'vue';
+import { entries, settings } from '../state';
+import { TEST_TYPES, ZONES } from '../constants';
+
+const form = reactive({
+    date: new Date().toISOString().slice(0, 10),
+    zone: settings.defaultZone,
+    testType: 'Basal',
+    startBG: '',
+    endBG: '',
+    duration: String(settings.defaultDuration),
+    notes: ''
+})
+
+function handleSubmit() {
+    //Lag ny entry og legg til i entries arrayet
+    const entry = {
+        id: Date.now(),
+        ...form
+    }
+    entries.push(entry)
+
+    // Reset form
+    form.date = new Date().toISOString().slice(0, 10)
+    form.zone = settings.defaultZone
+    form.testType = 'Basal'
+    form.startBG = ''
+    form.endBG = ''
+    form.duration = String(settings.defaultDuration)
+    form.notes = ''
+}
+</script>
+
+<template>
+    <div>
+        <h2>Ny test</h2>
+
+        <form @submit.prevent="handleSubmit">
+            <div>
+                <label>Test type:</label>
+                <select v-model="form.testType">
+                    <option v-for="type in TEST_TYPES" :key="type" :value="type">
+                        {{type}}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Dato:</label>
+                <input v-model="form.date" type="date" />
+            </div>
+
+            <div>
+                <label>Sone:</label>
+                <select v-model="form.zone">
+                    <option v-for="zone in ZONES" :key="zone.id" :value="zone.id">
+                        {{ zone.label }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Start BG:</label>
+                <input v-model="form.startBG" type="number" placeholder="5.0" />
+            </div>
+
+            <div>
+                <label>Slutt BG:</label>
+                <input v-model="form.endBG" type="number" placeholder="5.5" />
+            </div>
+
+            <div>
+                <label>Varighet (min):</label>
+                <input v-model="form.duration" type="number" />
+            </div>
+
+            <div>
+                <label>Notater:</label>
+                <textarea v-model="form.notes" placeholder="Ekstra info..."></textarea>
+            </div>
+
+            <button type="submit">Legg til test</button>
+        </form>
+
+        <h3>Loggede tester ({{ entries.length }})</h3>
+        <div v-if="entries.length === 0">Ingen tester ennå</div>
+        <div v-else>
+            <div v-for="entry in entries" :key="entry.id" style="border: 1px solid #334155; padding: 10px; margin: 5px;">
+                <p><strong>{{ entry.testType }}</strong> - {{ entry.date }}</p>
+                <p>{{ entry.startBG }} → {{ entry.endBG }} mmol/L</p>
+                <p v-if="entry.notes"><em>{{ entry.notes }}</em></p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+form {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+div {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+}
+
+input, select, textarea {
+    width: 100%;
+}
+
+button {
+    background: var(--color-accent);
+    color: var(--color-bg-primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+</style>
