@@ -5,6 +5,7 @@ import LogView from './views/LogView.vue';
 import AnalyzeView from './views/AnalyzeView.vue';
 import SettingsView from './views/SettingsView.vue';
 import BgLayer from './components/BgLayer.vue';
+import logoUrl from './assets/BolusLab-logo.png';
 
 const currentView = ref('home')
 </script>
@@ -14,7 +15,7 @@ const currentView = ref('home')
   <header class="app-header">
     <!-- Logo + Title -->
     <div class="header-left">
-      <div class="logo">BL</div>
+      <img :src="logoUrl" class="logo" alt="BolusLab" />
       <div>
         <div class="app-title">BolusLab</div>
         <div class="app-subtitle">Testverktøy for insulinsystemer</div>
@@ -59,19 +60,11 @@ const currentView = ref('home')
 }
 
 .logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--color-bg-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
   flex-shrink: 0;
-  letter-spacing: 0.01em;
 }
 
 .app-title {
