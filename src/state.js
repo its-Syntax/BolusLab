@@ -1,4 +1,5 @@
 import { reactive, watch } from "vue";
+import { ZONES } from "./constants";
 
 const KEYS = {
     entries: 'boluslab_entries',
@@ -14,16 +15,25 @@ function load(key, fallback) {
     }
 }
 
-export const entries = reactive(load(KEYS.entries, []))
-
-export const settings = reactive(load(KEYS.settings, {
+const defaultSettings = {
     userName: '',
     targetBG: 5.5,
     goodDelta: 0.5,
     okDelta: 1.2,
     defaultDuration: 120,
-    defaultZone: 'morgen',
-}))
+    defaultZone: ZONES[0].id,
+}
+
+const loadedSettings = load(KEYS.settings, defaultSettings)
+
+// Valider at defaultZone er en kjent sone-id, ellers tilbakestill
+if (!ZONES.find(z => z.id === loadedSettings.defaultZone)) {
+    loadedSettings.defaultZone = ZONES[0].id
+}
+
+export const entries = reactive(load(KEYS.entries, []))
+
+export const settings = reactive({ ...defaultSettings, ...loadedSettings })
 
 watch(
     () => [...entries],

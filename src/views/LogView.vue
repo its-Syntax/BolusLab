@@ -7,11 +7,9 @@ import Field from '../components/Field.vue'
 import ZoneBadge from '../components/ZoneBadge.vue'
 import Chip from '../components/Chip.vue'
 
-const validDefaultZone = ZONES.find(z => z.id === settings.defaultZone)?.id ?? ZONES[0].id
-
 const form = reactive({
   date: new Date().toISOString().slice(0, 10),
-  zone: validDefaultZone,
+  zone: settings.defaultZone,
   testType: 'Basal',
   basalRate: '',
   startBG: '',
@@ -125,7 +123,7 @@ function handleSubmit() {
 
 function resetForm() {
   form.date = new Date().toISOString().slice(0, 10)
-  form.zone = validDefaultZone
+  form.zone = settings.defaultZone
   form.testType = 'Basal'
   form.basalRate = ''
   form.startBG = ''
@@ -330,6 +328,7 @@ function handleDelete(id) {
           <div class="entry-left">
             <div class="entry-date">{{ entry.date }}</div>
             <ZoneBadge :zone="ZONES.find(z => z.id === entry.zone) ?? ZONES[0]" />
+
           </div>
 
           <div class="entry-main">

@@ -7,6 +7,7 @@ import Chip from './components/Chip.vue'
 import HomeView from './views/HomeView.vue';
 import LogView from './views/LogView.vue';
 import AnalyzeView from './views/AnalyzeView.vue';
+import SettingsView from './views/SettingsView.vue';
 
 const currentView = ref('home')
 const filterType =ref('all')
@@ -35,7 +36,7 @@ const filterType =ref('all')
     <HomeView v-if="currentView === 'home'" />
     <LogView v-else-if="currentView === 'log'" />
     <AnalyzeView v-else-if="currentView === 'analyze'" />
-    <div v-else>Innstillinger view går her</div>
+    <SettingsView v-else-if="currentView === 'settings'" />
   </main>
 </template>
 
