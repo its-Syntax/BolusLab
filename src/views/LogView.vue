@@ -359,7 +359,7 @@ function handleDelete(id) {
             <div
               v-if="entry.testType !== 'ISF' && deltaBG(entry) !== null"
               class="delta-badge"
-              :style="{ color: deltaColor(deltaBG(entry)), borderColor: deltaColor(deltaBG(entry)), backgroundColor: deltaColor(deltaBG(entry)) + '12' }"
+              :style="{ color: entry.testType === 'Basal' ? '#93c5fd' : deltaColor(deltaBG(entry)), borderColor: entry.testType === 'Basal' ? '#93c5fd' : deltaColor(deltaBG(entry)), backgroundColor: (entry.testType === 'Basal' ? '#93c5fd' : deltaColor(deltaBG(entry))) + '12' }"
             >
               {{ deltaBGStr(entry) }}
             </div>
