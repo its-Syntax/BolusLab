@@ -210,7 +210,7 @@ function handleDelete(id) {
               <input v-model="form.startBG" type="number" step="0.1" placeholder="5.5" />
             </Field>
 
-            <Field v-if="form.testType !== 'Basal'" label="Slutt BG (mmol/L)">
+            <Field label="Slutt BG (mmol/L)">
               <input v-model="form.endBG" type="number" step="0.1" placeholder="5.2" />
             </Field>
 
