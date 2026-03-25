@@ -128,7 +128,10 @@ const crData = computed(() => ZONES.map(z => {
             <div class="zone-grid">
                 <template v-for="{ zone, isfs, avg, dev, count } in isfData" :key="zone.id">
                     <div v-if="!isfs.length" class="zone-card" style="border: 1px solid #293548; opacity: 0.45">
-                        <ZoneBadge :zone="zone" />
+                        <div class="zone-header">
+                            <ZoneBadge :zone="zone" />
+                            <span class="zone-range">{{ zone.range }}</span>
+                        </div>
                         <div class="empty-label">Ingen tester</div>
                     </div>
                     <div
@@ -139,7 +142,10 @@ const crData = computed(() => ZONES.map(z => {
                             border: `1px solid ${consistency(avg, dev).color}35`,
                         }"
                     >
-                        <ZoneBadge :zone="zone" />
+                        <div class="zone-header">
+                            <ZoneBadge :zone="zone" />
+                            <span class="zone-range">{{ zone.range }}</span>
+                        </div>
                         <div v-if="isfs.length >= 2" style="margin-top: 10px">
                             <Sparkline :values="isfs" :color="zone.color" :width="120" :height="32" />
                         </div>
