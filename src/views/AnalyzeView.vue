@@ -205,6 +205,8 @@ const crData = computed(() => ZONES.map(z => {
                 </div>
             </div>
         </SectionCard>
+
+        <div style="height: 20px"></div>
     </div>
 </template>
 

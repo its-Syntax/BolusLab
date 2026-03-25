@@ -42,8 +42,6 @@ const heroAreaPath = `M 0,120 L 0,60 C 30,54 55,30 82,18 C 102,8 122,11 148,28
                 <!-- Y-axis labels -->
                 <text class="chart-label chart-label-1" x="3" y="9" font-size="7"
                     fill="#f87171" dominant-baseline="hanging" opacity="0">10</text>
-                <text class="chart-label chart-label-2" x="3" y="79" font-size="7"
-                    fill="#34d399" opacity="0">mål 5.5</text>
                 <text class="chart-label chart-label-3" x="3" y="110" font-size="7"
                     fill="#fbbf24" opacity="0">4</text>
 
