@@ -138,8 +138,7 @@ const crData = computed(() => ZONES.map(z => {
                         v-else
                         class="zone-card"
                         :style="{
-                            background: consistency(avg, dev).color + '08',
-                            border: `1px solid ${consistency(avg, dev).color}35`,
+                            border: `1px solid ${zone.color}35`,
                         }"
                     >
                         <div class="zone-header">
@@ -150,7 +149,7 @@ const crData = computed(() => ZONES.map(z => {
                             <Sparkline :values="isfs" :color="zone.color" :width="120" :height="32" />
                         </div>
                         <div class="isf-avg">
-                            <span class="isf-value">{{ avg.toFixed(1) }}</span>
+                            <span class="isf-value" :style="{ color: zone.color }">{{ avg.toFixed(1) }}</span>
                             <span class="isf-unit">mmol/L/E</span>
                         </div>
                         <div v-if="dev !== null" class="stat-small">±{{ dev.toFixed(2) }} · {{ count }} tester</div>
